@@ -74,10 +74,14 @@ If ( player->GetLevel != prev_lvl )
   ElseIf ( plus > 1 )
     Set plus To 0
     Set attr2 To 0
-    Set lvl123_prev_lvl To ( GetLevel )
+    Set prev_lvl To ( GetLevel )
   Else
     Set plus To ( plus + 1 )
-    MessageBox, "+%g attribute", ( plus + 1 ) "Strength", "Intelligence", "Willpower", "Agility", "Speed", "Endurance", "Personality"
+    If ( plus == 1 )
+      MessageBox, "Choose +2 attribute", "Strength", "Intelligence", "Willpower", "Agility", "Speed", "Endurance", "Personality"
+    Else
+      MessageBox, "Choose +3 attribute", "Strength", "Intelligence", "Willpower", "Agility", "Speed", "Endurance", "Personality"
+    EndIf
     Set asked To 1
   EndIf
 EndIf
