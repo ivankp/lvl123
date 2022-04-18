@@ -1,4 +1,4 @@
-Begin lvl123_main
+Begin lvl123
 
 Float prev_lvl
 Short plus
@@ -7,14 +7,14 @@ Short asked
 Short button
 
 If ( player->GetLevel != prev_lvl )
-  If ( prev_lvl == 0 )
-    Set prev_lvl To ( GetLevel )
-  ElseIf ( asked == 1 )
-    Set button To ( GetButtonPressed )
+  If ( asked == 1 )
+    MessageBox, "asked == 1"
+
+    Set button To GetButtonPressed
     If ( button != -1 )
       If ( button == 0 ) ; Strength
         If ( attr2 != 1 )
-          ModStrength, plus
+          player->ModStrength, plus
           Set attr2 To 1
         Else
           MessageBox, "You have already chosen Strength"
@@ -22,7 +22,7 @@ If ( player->GetLevel != prev_lvl )
         EndIf
       ElseIf ( button == 1 ) ; Intelligence
         If ( attr2 != 2 )
-          ModIntelligence, plus
+          player->ModIntelligence, plus
           Set attr2 To 2
         Else
           MessageBox, "You have already chosen Intelligence"
@@ -30,7 +30,7 @@ If ( player->GetLevel != prev_lvl )
         EndIf
       ElseIf ( button == 2 ) ; Willpower
         If ( attr2 != 3 )
-          ModWillpower, plus
+          player->ModWillpower, plus
           Set attr2 To 3
         Else
           MessageBox, "You have already chosen Willpower"
@@ -38,7 +38,7 @@ If ( player->GetLevel != prev_lvl )
         EndIf
       ElseIf ( button == 3 ) ; Agility
         If ( attr2 != 4 )
-          ModAgility, plus
+          player->ModAgility, plus
           Set attr2 To 4
         Else
           MessageBox, "You have already chosen Agility"
@@ -46,7 +46,7 @@ If ( player->GetLevel != prev_lvl )
         EndIf
       ElseIf ( button == 4 ) ; Speed
         If ( attr2 != 5 )
-          ModSpeed, plus
+          player->ModSpeed, plus
           Set attr2 To 5
         Else
           MessageBox, "You have already chosen Speed"
@@ -54,7 +54,7 @@ If ( player->GetLevel != prev_lvl )
         EndIf
       ElseIf ( button == 5 ) ; Endurance
         If ( attr2 != 6 )
-          ModEndurance, plus
+          player->ModEndurance, plus
           Set attr2 To 6
         Else
           MessageBox, "You have already chosen Endurance"
@@ -62,7 +62,7 @@ If ( player->GetLevel != prev_lvl )
         EndIf
       ElseIf ( button == 6 ) ; Personality
         If ( attr2 != 7 )
-          ModPersonality, plus
+          player->ModPersonality, plus
           Set attr2 To 7
         Else
           MessageBox, "You have already chosen Personality"
@@ -71,11 +71,21 @@ If ( player->GetLevel != prev_lvl )
       EndIf
       Set asked To 0
     EndIf
-  ElseIf ( plus > 1 )
+  ElseIf ( prev_lvl == 0 )
+    MessageBox, "prev_lvl == 0"
+
+    Set prev_lvl To ( player->GetLevel )
     Set plus To 0
     Set attr2 To 0
-    Set prev_lvl To ( GetLevel )
+  ElseIf ( plus > 1 )
+    MessageBox, "plus > 1"
+
+    Set prev_lvl To ( player->GetLevel )
+    Set plus To 0
+    Set attr2 To 0
   Else
+    MessageBox, "Else"
+
     Set plus To ( plus + 1 )
     If ( plus == 1 )
       MessageBox, "Choose +2 attribute", "Strength", "Intelligence", "Willpower", "Agility", "Speed", "Endurance", "Personality"
