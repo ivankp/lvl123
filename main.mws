@@ -1,0 +1,22 @@
+Begin lvl123_main
+
+Short slept
+Float lvl_cur
+
+If ( GetPCSleep == 1 )
+  Set slept To 1
+  ; Return
+Else
+  If ( slept == 1 )
+    Set lvl_cur To ( player->GetLevel )
+    MessageBox, "Level %.0f", lvl_cur
+    Set slept To 0
+  EndIf
+EndIf
+
+If ( player->GetLevel != lvl123_lvl_prev )
+  Set lvl_cur To ( player->GetLevel )
+  MessageBox, "Level changed to %.0f", lvl_cur
+EndIf
+
+End
