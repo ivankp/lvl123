@@ -1,22 +1,85 @@
 Begin lvl123_main
 
-Short slept
-Float lvl_cur
+Float prev_lvl
+Short plus
+Short attr2
+Short asked
+Short button
 
-If ( GetPCSleep == 1 )
-  Set slept To 1
-  ; Return
-Else
-  If ( slept == 1 )
-    Set lvl_cur To ( player->GetLevel )
-    MessageBox, "Level %.0f", lvl_cur
-    Set slept To 0
+If ( player->GetLevel != prev_lvl )
+  If ( prev_lvl == 0 )
+    Set prev_lvl To ( GetLevel )
+  ElseIf ( asked == 1 )
+    Set button To ( GetButtonPressed )
+    If ( button != -1 )
+      If ( button == 0 ) ; Strength
+        If ( attr2 != 1 )
+          ModStrength, plus
+          Set attr2 To 1
+        Else
+          MessageBox, "You have already chosen Strength"
+          Set plus To ( plus - 1 )
+        EndIf
+      ElseIf ( button == 1 ) ; Intelligence
+        If ( attr2 != 2 )
+          ModIntelligence, plus
+          Set attr2 To 2
+        Else
+          MessageBox, "You have already chosen Intelligence"
+          Set plus To ( plus - 1 )
+        EndIf
+      ElseIf ( button == 2 ) ; Willpower
+        If ( attr2 != 3 )
+          ModWillpower, plus
+          Set attr2 To 3
+        Else
+          MessageBox, "You have already chosen Willpower"
+          Set plus To ( plus - 1 )
+        EndIf
+      ElseIf ( button == 3 ) ; Agility
+        If ( attr2 != 4 )
+          ModAgility, plus
+          Set attr2 To 4
+        Else
+          MessageBox, "You have already chosen Agility"
+          Set plus To ( plus - 1 )
+        EndIf
+      ElseIf ( button == 4 ) ; Speed
+        If ( attr2 != 5 )
+          ModSpeed, plus
+          Set attr2 To 5
+        Else
+          MessageBox, "You have already chosen Speed"
+          Set plus To ( plus - 1 )
+        EndIf
+      ElseIf ( button == 5 ) ; Endurance
+        If ( attr2 != 6 )
+          ModEndurance, plus
+          Set attr2 To 6
+        Else
+          MessageBox, "You have already chosen Endurance"
+          Set plus To ( plus - 1 )
+        EndIf
+      ElseIf ( button == 6 ) ; Personality
+        If ( attr2 != 7 )
+          ModPersonality, plus
+          Set attr2 To 7
+        Else
+          MessageBox, "You have already chosen Personality"
+          Set plus To ( plus - 1 )
+        EndIf
+      EndIf
+      Set asked To 0
+    EndIf
+  ElseIf ( plus > 1 )
+    Set plus To 0
+    Set attr2 To 0
+    Set lvl123_prev_lvl To ( GetLevel )
+  Else
+    Set plus To ( plus + 1 )
+    MessageBox, "+%g attribute", ( plus + 1 ) "Strength", "Intelligence", "Willpower", "Agility", "Speed", "Endurance", "Personality"
+    Set asked To 1
   EndIf
-EndIf
-
-If ( player->GetLevel != lvl123_lvl_prev )
-  Set lvl_cur To ( player->GetLevel )
-  MessageBox, "Level changed to %.0f", lvl_cur
 EndIf
 
 End
